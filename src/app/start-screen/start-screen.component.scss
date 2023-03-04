@@ -1,0 +1,36 @@
+.start-screen {    
+    
+    background-color: #404044;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        height: 95vh;
+    }
+}
+
+.start-banner-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 80px;
+    display: flex;
+    justify-content: center;
+
+    img {
+        max-width: 25vw;
+        height: auto;
+        transition: all 100ms ease-in-out;
+        
+        &:hover {
+            filter: brightness(1.2);
+            cursor: pointer;
+            transform: scale(1.05);
+            transition: all 100ms ease-in-out;
+        }
+    }
+}
