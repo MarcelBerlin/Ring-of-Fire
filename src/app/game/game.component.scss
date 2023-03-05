@@ -3,6 +3,7 @@
     height: 100vh;
     max-width: 100%;
     background-image: url('/assets/img/background-2.jpg');
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,6 +34,11 @@
 .played-card {
     right: 25px;
     transform: scale(1.1) translateX(180px) translateY(-200px) rotate(-20deg);
+}
+
+.player-container-position {
+    position: absolute;
+    right: 0;
 }
 
 @keyframes pick-card-animation {
