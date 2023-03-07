@@ -11,11 +11,16 @@
         
     }
     
-    background-color: lightsalmon;
+    background-color: rgb(100, 100, 100, 0.8);
     img {
-        width: 100px;
-        height: 100px;
+        
+        width: 70px;
+        height: 70px;
         object-fit: cover;
 
     }
+}
+
+.player-Active {
+    background-color: rgb(255, 123, 0) !important;
 }
