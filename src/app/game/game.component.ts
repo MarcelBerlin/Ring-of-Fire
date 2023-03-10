@@ -26,7 +26,10 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (!this.pickCardAnimation) {
+    if (this.game.players.length == 0) {
+      alert('Bitte Spieler hinzufügen!');
+      return;
+    } if (!this.pickCardAnimation) {
       this.currentCard = this.game.stack.pop();
       console.log(this.currentCard);
       this.pickCardAnimation = true;
@@ -35,7 +38,7 @@ export class GameComponent implements OnInit {
 
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-      
+
       setTimeout(() => {
         this.game.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
@@ -43,15 +46,16 @@ export class GameComponent implements OnInit {
     }
   }
 
-  openDialog(): void {
-    if (this.game.players.length > 3) {
-      alert('Maximal 4 Spieler können gleichzeitig spielen!');
-      return;
-    } const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-    dialogRef.afterClosed().subscribe((name: string) => {
-      this.game.players.push(name);
-    });
+openDialog(): void {
+  if(this.game.players.length > 3) {
+  alert('Maximal 4 Spieler können gleichzeitig spielen!');
+  return;
+} const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+
+dialogRef.afterClosed().subscribe((name: string) => {
+  this.game.players.push(name);
+});
   }
 
 
