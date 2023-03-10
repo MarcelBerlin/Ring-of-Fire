@@ -47,6 +47,13 @@
     bottom: 32px;
 }
 
+.info-panel {
+    position: absolute;
+    bottom: 32px;
+    left: 100px;
+    right: 100px;
+}
+
 @keyframes pick-card-animation {
     
     0% {
