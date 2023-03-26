@@ -1,9 +1,11 @@
 .player {
-    width: 300px;
+    width: 250px;
     display: flex;
     align-items: center;
+    overflow-x: hidden;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
+    animation: non-active-player 300ms ease-in-out;
 
     span {
         font-size: 32px;
@@ -22,5 +24,29 @@
 }
 
 .player-Active {
-    background-color: rgb(240, 240, 60) !important;
+    width: 300px;
+    animation: active-player 300ms ease-in-out;
+    background-color: rgb(240, 162, 60) !important;
+}
+
+@keyframes active-player {
+
+    0% {
+        width: 250px;
+    }
+
+    100% {
+        width: 300px;
+    }
+} 
+
+@keyframes non-active-player {
+
+    0% {
+        width: 300px;
+    }
+
+    100% {
+        width: 250px;
+    }
 }

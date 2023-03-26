@@ -47,15 +47,17 @@ export class GameComponent implements OnInit {
   }
 
 
-openDialog(): void {
-  if(this.game.players.length > 3) {
-  alert('Maximal 4 Spieler können gleichzeitig spielen!');
-  return;
-} const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+  openDialog(): void {
+    if (this.game.players.length > 3) {
+      alert('Maximal 4 Spieler können gleichzeitig spielen!');
+      return;
+    } const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-dialogRef.afterClosed().subscribe((name: string) => {
-  this.game.players.push(name);
-});
+    dialogRef.afterClosed().subscribe((name: string) => {
+      if (name && name.length > 0) {
+        this.game.players.push(name);
+      }
+    });
   }
 
 
