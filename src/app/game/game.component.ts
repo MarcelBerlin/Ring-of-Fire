@@ -22,41 +22,37 @@ export class GameComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   games$: Observable<any[]>;
 
-  constructor(
+  constructor(    
     public dialog: MatDialog,
-    private route: ActivatedRoute,
-
-  ) {
-
+    private route: ActivatedRoute) 
+    {
     const aCollection = collection(this.firestore, 'games')
     this.games$ = collectionData(aCollection);
-
   }
 
   ngOnInit(): void {
     this.newGame();
-    
+
     this.route.params.subscribe(params => {
       const gameId = params['id'];
       console.log('Game ID:', gameId);
-
       const gameRef = doc(this.firestore, 'games', gameId);
       console.log('Game Ref:', gameRef);
-
       console.log('Game ID:', gameRef.id);
+
+      this.games$.subscribe((firestore) => {
+        console.log(firestore);
+      })
+
     });
-    
-    const coll = collection(this.firestore, 'games');
-    let gameInfo = addDoc(coll, { game: this.game.toJson() });
-    console.log('Game info', gameInfo);
-    
   }
 
   newGame() {
     this.game = new Game();
-    this.games$.subscribe((firestore) => {
-      console.log(firestore);
-    })
+    const coll = collection(this.firestore, 'games');
+    let gameInfo = addDoc(coll, { game: this.game.toJson() });
+    console.log('Game info', gameInfo);
+
   }
 
   takeCard() {
