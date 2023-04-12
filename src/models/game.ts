@@ -20,6 +20,7 @@ export class Game {
             stack: this.stack,
             playedCards: this.playedCards,
             currentPlayer: this.currentPlayer
+            
         };
     }
 }
