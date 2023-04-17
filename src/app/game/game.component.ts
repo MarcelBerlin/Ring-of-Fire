@@ -18,13 +18,12 @@ export class GameComponent implements OnInit {
   pickCardAnimation = false;
   currentCard: string = '';
   game: Game;
-  gameId: string;
+  gameId: string;  
   firestore: Firestore = inject(Firestore);
   games$: Observable<any[]>;
 
   constructor(
-    public dialog: MatDialog,
-    private router: Router,
+    public dialog: MatDialog,    
     private route: ActivatedRoute) {
     const aCollection = collection(this.firestore, 'games')
     this.games$ = collectionData(aCollection);
@@ -32,31 +31,21 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.newGame();
-
     this.route.params.subscribe(params => {
       const gameId = params['id'];
       console.log('Game ID:', gameId);
       const gameRef = doc(this.firestore, 'games', gameId);
       console.log('Game Ref:', gameRef);
       console.log('Game ID:', gameRef.id);
-
       this.games$.subscribe((firestore) => {
-        console.log(firestore);
-      })
-
+        console.log('FireStore', firestore);
+      });      
     });
+
   }
 
   newGame() {
-    this.game = new Game();
-    const coll = collection(this.firestore, 'games');
-    let gameInfo = addDoc(coll, { game: this.game.toJson() })
-      .then(() => { this.router.navigateByUrl('/game/' + this.gameId) })
-      .catch((error) => {
-        console.error('Error adding game info to Firestore', error);
-      });
-    console.log('Game info', gameInfo);
-
+    this.game = new Game();    
   }
 
 
