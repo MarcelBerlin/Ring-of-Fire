@@ -37,9 +37,11 @@ export class GameComponent implements OnInit {
       const gameRef = doc(this.firestore, 'games', gameId);
       console.log('Game Ref:', gameRef);
       console.log('Game ID:', gameRef.id);
+
       this.games$.subscribe((firestore) => {
         console.log('FireStore', firestore);
       });      
+      
     });
 
   }
