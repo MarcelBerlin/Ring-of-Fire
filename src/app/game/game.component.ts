@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { Firestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { doc } from '@angular/fire/firestore';
 
 
@@ -22,10 +22,10 @@ export class GameComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   games$: Observable<any[]>;
 
-  constructor(    
+  constructor(
     public dialog: MatDialog,
-    private route: ActivatedRoute) 
-    {
+    private router: Router,
+    private route: ActivatedRoute) {
     const aCollection = collection(this.firestore, 'games')
     this.games$ = collectionData(aCollection);
   }
@@ -50,10 +50,15 @@ export class GameComponent implements OnInit {
   newGame() {
     this.game = new Game();
     const coll = collection(this.firestore, 'games');
-    let gameInfo = addDoc(coll, { game: this.game.toJson() });
+    let gameInfo = addDoc(coll, { game: this.game.toJson() })
+      .then(() => { this.router.navigateByUrl('/game/' + this.gameId) })
+      .catch((error) => {
+        console.error('Error adding game info to Firestore', error);
+      });
     console.log('Game info', gameInfo);
 
   }
+
 
   takeCard() {
     if (this.game.players.length == 0) {
