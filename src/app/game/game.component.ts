@@ -1,8 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Firestore, collection, collectionData, doc, getDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -37,7 +37,6 @@ export class GameComponent implements OnInit {
       })
     })  
   }
-
 
 
   newGame() {
