@@ -12,9 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./game.component.scss']
 })
 
-export class GameComponent implements OnInit {
-  pickCardAnimation = false;
-  currentCard: string = '';
+export class GameComponent implements OnInit {  
   game: Game;
   gameId: string;  
   games$: Observable<any[]>;
@@ -57,7 +55,9 @@ export class GameComponent implements OnInit {
     this.game.players = data['players'];    
     this.game.stack = data['stack'];
     this.game.playedCards = data['playedCards'];
-    this.game.currentPlayer = data['currentPlayer'];    
+    this.game.currentPlayer = data['currentPlayer'];   
+    this.game.pickCardAnimation = data['pickCardAnimation'];
+    this.game.currentCard = data['currentCard']; 
   }
 
   saveGame() {
@@ -70,19 +70,18 @@ export class GameComponent implements OnInit {
     if (this.game.players.length == 0) {
       alert('Bitte Spieler hinzufügen!');
       return;
-    } if (!this.pickCardAnimation) {
-      this.currentCard = this.game.stack.pop();
-      console.log(this.currentCard);
-      this.pickCardAnimation = true;
-      console.log('New card:' + this.currentCard);
-      console.log('Game is', this.game);
-      this.saveGame();
+    } if (!this.game.pickCardAnimation) {
+      this.game.currentCard = this.game.stack.pop();
+      console.log(this.game.currentCard);
+      this.game.pickCardAnimation = true;
+      console.log('New card:' + this.game.currentCard);
+      console.log('Game is', this.game);     
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-
+      this.saveGame();
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
-        this.pickCardAnimation = false;
+        this.game.playedCards.push(this.game.currentCard);
+        this.game.pickCardAnimation = false;
         this.saveGame();
       }, 1250);
     }
