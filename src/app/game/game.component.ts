@@ -2,11 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { doc } from '@angular/fire/firestore';
-
+import { Firestore, collection, collectionData, doc, getDoc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game',
@@ -19,37 +17,48 @@ export class GameComponent implements OnInit {
   currentCard: string = '';
   game: Game;
   gameId: string;  
-  firestore: Firestore = inject(Firestore);
   games$: Observable<any[]>;
+  coll: any;
 
   constructor(
-    public dialog: MatDialog,    
-    private route: ActivatedRoute) {
-    const aCollection = collection(this.firestore, 'games')
-    this.games$ = collectionData(aCollection);
-  }
+    public firestore: Firestore,
+    public dialog: MatDialog,   
+    private route: ActivatedRoute) {}
+
 
   ngOnInit(): void {
+    this.coll = collection(this.firestore, 'games');
+    this.games$ = collectionData(this.coll);
     this.newGame();
-    this.route.params.subscribe(params => {
-      const gameId = params['id'];
-      console.log('Game ID:', gameId);
-      const gameRef = doc(this.firestore, 'games', gameId);
-      console.log('Game Ref:', gameRef);
-      console.log('Game ID:', gameRef.id);
-
-      this.games$.subscribe((firestore) => {
-        console.log('FireStore', firestore);
-      });      
-      
-    });
-
+    this.route.params.subscribe((params) => {
+      this.gameId = params['id'];
+      this.games$.subscribe(() => {
+        this.grabCorrectDocument();
+      })
+    })  
   }
+
+
 
   newGame() {
-    this.game = new Game();    
+    this.game = new Game();
+  }  
+
+
+  async grabCorrectDocument() {
+    let docRef = doc(this.firestore,"games",this.gameId);
+    let docSnap = await getDoc(docRef);
+    let data = await docSnap.data();
+    this.updateData(data);
   }
 
+  updateData(data) {
+    this.game.players = data['players'];    
+    this.game.stack = data['stack'];
+    this.game.playedCards = data['playedCards'];
+    this.game.currentPlayer = data['currentPlayer'];    
+  }
+  
 
   takeCard() {
     if (this.game.players.length == 0) {

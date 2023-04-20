@@ -10,7 +10,7 @@ import { Game } from 'src/models/game';
 })
 export class StartScreenComponent implements OnInit {
   
-  constructor(private firestore: AngularFirestore, private router: Router) { }
+  constructor(public firestore: AngularFirestore, private router: Router) { }
 
   ngOnInit(): void {
     
@@ -18,6 +18,7 @@ export class StartScreenComponent implements OnInit {
 
   newGame() {
     let game = new Game();
+    debugger;
     this.firestore
       .collection('games')
       .add(game.toJson())
