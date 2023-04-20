@@ -32,6 +32,7 @@ export class GameComponent implements OnInit {
     this.newGame();
     this.route.params.subscribe((params) => {
       this.gameId = params['id'];
+      console.log(this.gameId);      
       this.games$.subscribe(() => {
         this.grabCorrectDocument();
       })
@@ -46,6 +47,7 @@ export class GameComponent implements OnInit {
 
   async grabCorrectDocument() {
     let docRef = doc(this.firestore,"games",this.gameId);
+    console.log(docRef);    
     let docSnap = await getDoc(docRef);
     let data = await docSnap.data();
     this.updateData(data);
