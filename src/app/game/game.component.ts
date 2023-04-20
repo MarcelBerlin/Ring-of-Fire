@@ -3,7 +3,7 @@ import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { ActivatedRoute } from '@angular/router';
-import { Firestore, collection, collectionData, doc, getDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -59,6 +59,11 @@ export class GameComponent implements OnInit {
     this.game.playedCards = data['playedCards'];
     this.game.currentPlayer = data['currentPlayer'];    
   }
+
+  saveGame() {
+    let docRef = doc(this.firestore,"games",this.gameId);
+    updateDoc(docRef, this.game.toJson());
+  }
   
 
   takeCard() {
@@ -71,13 +76,14 @@ export class GameComponent implements OnInit {
       this.pickCardAnimation = true;
       console.log('New card:' + this.currentCard);
       console.log('Game is', this.game);
-
+      this.saveGame();
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
 
       setTimeout(() => {
         this.game.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
+        this.saveGame();
       }, 1250);
     }
   }
@@ -92,7 +98,8 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
-      }
+        this.saveGame();
+      }     
     });
   }
 
