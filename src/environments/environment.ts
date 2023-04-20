@@ -6,4 +6,5 @@ export const environment = {
     apiKey: 'AIzaSyDr1Kh9PFPjGRLGGQqe71LFbHvvqK0k4kU',
     authDomain: 'ring-of-fire-31fd6.firebaseapp.com',
     messagingSenderId: '701472008847',
-  },};
+  },
+};

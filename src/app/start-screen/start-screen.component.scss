@@ -1,6 +1,7 @@
 .start-screen {    
     
-    background-color: #404044;
+    background-size: cover;    
+    position: relative;
     width: 100vw;
     height: 100vh;
     max-width: 100%;
@@ -9,7 +10,8 @@
     align-items: center;
 
     img {
-        height: 95vh;
+        height: 100vh;
+        
     }
 }
 
@@ -17,12 +19,12 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 80px;
+    bottom: 225px;
     display: flex;
     justify-content: center;
 
     img {
-        width: 25vw;
+        width: 15%;
         max-width: 100%;
         height: auto;
         transition: all 100ms ease-in-out;
