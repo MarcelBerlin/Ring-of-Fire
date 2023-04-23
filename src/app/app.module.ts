@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
@@ -9,7 +8,6 @@ import { PlayerComponent } from './player/player.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { DialogAddPlayerComponent } from './dialog-add-player/dialog-add-player.component';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
@@ -22,8 +20,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { DialogEditPlayerComponent } from './dialog-edit-player/dialog-edit-player.component';
 import { DialogEndOfGameComponent } from './dialog-end-of-game/dialog-end-of-game.component';
+import { DialogAddPlayerComponent } from './dialog-add-player/dialog-add-player.component';
 
 
 @NgModule({
@@ -31,24 +29,23 @@ import { DialogEndOfGameComponent } from './dialog-end-of-game/dialog-end-of-gam
     AppComponent,
     StartScreenComponent,
     GameComponent,
-    PlayerComponent,
-    DialogAddPlayerComponent,
+    PlayerComponent,   
     GameInfoComponent,
-    DialogEditPlayerComponent,
     DialogEndOfGameComponent,
-    
-  ],
+    DialogAddPlayerComponent,
+   
+],
   imports: [
     BrowserModule,    
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
