@@ -1,6 +1,7 @@
 .start-screen {    
     
-    background-size: cover;    
+    background-size: contain;  
+    background-color: black;    
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -10,18 +11,17 @@
     align-items: center;
 
     img {
-        height: 100vh;
-        
+       width: 100vw;        
     }
 }
 
-.start-banner-container {
+.start-banner-container {    
+    display: flex;
+    justify-content: center;
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 225px;
-    display: flex;
-    justify-content: center;
+    bottom: 185px;
 
     img {
         width: 15%;
@@ -37,3 +37,4 @@
         }
     }
 }
+

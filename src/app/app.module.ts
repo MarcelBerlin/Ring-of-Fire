@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DialogAddPlayerComponent } from './dialog-add-player/dialog-add-player.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -22,6 +22,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { DialogEditPlayerComponent } from './dialog-edit-player/dialog-edit-player.component';
+import { DialogEndOfGameComponent } from './dialog-end-of-game/dialog-end-of-game.component';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     PlayerComponent,
     DialogAddPlayerComponent,
     GameInfoComponent,
+    DialogEditPlayerComponent,
+    DialogEndOfGameComponent,
     
   ],
   imports: [
@@ -44,6 +48,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
