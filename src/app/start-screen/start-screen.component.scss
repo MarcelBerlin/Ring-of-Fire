@@ -1,8 +1,7 @@
 .start-screen {    
     
     background-size: contain;  
-    background-color: black;    
-    position: relative;
+    background-color: black;   
     width: 100vw;
     height: 100vh;
     max-width: 100%;
@@ -11,8 +10,20 @@
     align-items: center;
 
     img {
-       width: 100vw;        
+       height: 100vh;        
     }
+
+
+}
+
+.logo {
+    position: relative;
+    width: 35%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .start-banner-container {    
@@ -21,10 +32,10 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 185px;
+    bottom: 0;
 
     img {
-        width: 15%;
+        width: 15vw;
         max-width: 100%;
         height: auto;
         transition: all 100ms ease-in-out;
@@ -37,4 +48,6 @@
         }
     }
 }
+
+
 
